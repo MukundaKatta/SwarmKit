@@ -10,7 +10,12 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 from swarmkit.config import SwarmConfig
-from swarmkit.utils import aggregate_results, match_agent_to_task, plurality_vote, weighted_consensus
+from swarmkit.utils import (
+    aggregate_results,
+    match_agent_to_task,
+    plurality_vote,
+    weighted_consensus,
+)
 
 logger = logging.getLogger(__name__)
 

@@ -38,7 +38,9 @@ def match_agent_to_task(agents: list[Agent], task: Task) -> Agent | None:
     if not agents:
         return None
 
-    scored = [(agent, capability_overlap(agent.capabilities, task.requirements)) for agent in agents]
+    scored = [
+        (agent, capability_overlap(agent.capabilities, task.requirements)) for agent in agents
+    ]
     scored.sort(key=lambda pair: pair[1], reverse=True)
 
     best_agent, best_score = scored[0]
@@ -49,7 +51,9 @@ def match_agent_to_task(agents: list[Agent], task: Task) -> Agent | None:
 
 def rank_agents_for_task(agents: list[Agent], task: Task) -> list[tuple[Agent, float]]:
     """Return agents sorted by descending match score for *task*."""
-    scored = [(agent, capability_overlap(agent.capabilities, task.requirements)) for agent in agents]
+    scored = [
+        (agent, capability_overlap(agent.capabilities, task.requirements)) for agent in agents
+    ]
     scored.sort(key=lambda pair: pair[1], reverse=True)
     return scored
 

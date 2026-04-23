@@ -1,11 +1,8 @@
 """Tests for SwarmKit core classes."""
 
-import asyncio
-
 import pytest
 
 from swarmkit.core import Agent, Swarm, Task
-
 
 # ── Agent Tests ──────────────────────────────────────────────────────
 

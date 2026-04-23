@@ -190,7 +190,7 @@ class Swarm(BaseModel):
         results = await asyncio.gather(*coros, return_exceptions=True)
         collected: list[dict[str, Any]] = []
         for r in results:
-            if isinstance(r, Exception):
+            if isinstance(r, BaseException):
                 logger.error("Task failed: %s", r)
                 collected.append({"status": "error", "error": str(r)})
             else:

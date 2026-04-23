@@ -1,6 +1,6 @@
 # SwarmKit 🐝
 
-[![CI](https://github.com/officethree/swarmkit/actions/workflows/ci.yml/badge.svg)](https://github.com/officethree/swarmkit/actions/workflows/ci.yml)
+[![CI](https://github.com/MukundaKatta/SwarmKit/actions/workflows/ci.yml/badge.svg)](https://github.com/MukundaKatta/SwarmKit/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PyPI version](https://img.shields.io/pypi/v/swarmkit.svg)](https://pypi.org/project/swarmkit/)
@@ -57,8 +57,8 @@ pip install swarmkit
 Or install from source:
 
 ```bash
-git clone https://github.com/officethree/swarmkit.git
-cd swarmkit
+git clone https://github.com/MukundaKatta/SwarmKit.git
+cd SwarmKit
 pip install -e ".[dev]"
 ```
 

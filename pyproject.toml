@@ -36,9 +36,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/officethree/swarmkit"
-Repository = "https://github.com/officethree/swarmkit"
-Issues = "https://github.com/officethree/swarmkit/issues"
+Homepage = "https://github.com/MukundaKatta/SwarmKit"
+Repository = "https://github.com/MukundaKatta/SwarmKit"
+Issues = "https://github.com/MukundaKatta/SwarmKit/issues"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

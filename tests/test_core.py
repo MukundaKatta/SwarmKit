@@ -50,11 +50,13 @@ class TestTask:
 
 class TestSwarm:
     def _make_swarm(self) -> Swarm:
-        return Swarm(agents=[
-            Agent(name="A1", role="search", capabilities=["search", "fetch"]),
-            Agent(name="A2", role="write", capabilities=["write", "edit"]),
-            Agent(name="A3", role="review", capabilities=["review", "validate"]),
-        ])
+        return Swarm(
+            agents=[
+                Agent(name="A1", role="search", capabilities=["search", "fetch"]),
+                Agent(name="A2", role="write", capabilities=["write", "edit"]),
+                Agent(name="A3", role="review", capabilities=["review", "validate"]),
+            ]
+        )
 
     def test_add_and_remove_agent(self):
         swarm = Swarm()

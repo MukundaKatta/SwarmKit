@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import logging
 import uuid
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from swarmkit.config import SwarmConfig
 from swarmkit.utils import (
@@ -34,8 +35,7 @@ class Agent(BaseModel):
     metadata: dict[str, Any] = Field(default_factory=dict)
     _inbox: list[str] = []
 
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def model_post_init(self, __context: Any) -> None:
         object.__setattr__(self, "_inbox", [])
@@ -79,8 +79,11 @@ class Agent(BaseModel):
             for cap in self.capabilities:
                 if cap.lower() in option.lower() or option.lower() in cap.lower():
                     return option
-        # Deterministic fallback: hash agent id to pick
-        idx = hash(self.id) % len(options)
+        # Deterministic fallback: derive a stable index from the agent id.
+        # ``hash()`` on strings is salted per process (PYTHONHASHSEED), so it is
+        # not reproducible; use a stable digest of the id instead.
+        digest = hashlib.sha256(self.id.encode()).digest()
+        idx = int.from_bytes(digest[:8], "big") % len(options)
         return options[idx]
 
     async def evaluate_proposal(self, proposal: str) -> float:
@@ -124,8 +127,7 @@ class Swarm(BaseModel):
     config: SwarmConfig = Field(default_factory=SwarmConfig)
     _results: list[dict[str, Any]] = []
 
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def model_post_init(self, __context: Any) -> None:
         object.__setattr__(self, "_results", [])
@@ -135,9 +137,7 @@ class Swarm(BaseModel):
     def add_agent(self, agent: Agent) -> None:
         """Add an agent to the swarm."""
         if len(self.agents) >= self.config.max_agents:
-            raise ValueError(
-                f"Swarm has reached max capacity ({self.config.max_agents} agents)"
-            )
+            raise ValueError(f"Swarm has reached max capacity ({self.config.max_agents} agents)")
         self.agents.append(agent)
         logger.info("Added agent %s to swarm (total: %d)", agent.name, len(self.agents))
 
